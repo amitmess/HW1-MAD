@@ -2,7 +2,7 @@ package com.bank;
 
 public class PremiumAccount implements IAccount {
 
-    private int accountNumber;
+    private final int accountNumber;
     private double balance;
 
     public PremiumAccount(int accountNumber) {
@@ -12,11 +12,16 @@ public class PremiumAccount implements IAccount {
 
     @Override
     public void Deposit(double amount) {
+        if (amount <= 0) return;
+        balance += amount;
     }
 
     @Override
     public double Withdraw(double amount) {
-        return 0.0;
+        if (amount <= 0) return 0.0;
+
+        balance -= amount;     // can go negative freely
+        return amount;
     }
 
     @Override
