@@ -88,7 +88,7 @@ public class Main {
 
         System.out.println("\n=== Bank scenario ===");
 
-        Bank bank = new Bank();
+        IBank bank = new Bank();
 
         // Open accounts in bank (re-using some accounts from above)
         bank.OpenAccount(a1);
