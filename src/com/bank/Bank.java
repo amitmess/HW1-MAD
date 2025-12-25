@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Bank {
+public class Bank implements IBank {
 
     private List<IAccount> accounts;
 
@@ -12,14 +12,24 @@ public class Bank {
         this.accounts = new ArrayList<>();
     }
 
-    // OpenAccount: gets an account object and adds it to the bank accounts list.
+    // OpenAccount: adds account only if accountNumber doesn't already exist
+    @Override
     public void OpenAccount(IAccount account) {
         if (account == null) return;
+
+        int newNum = account.GetAccountNumber();
+        for (IAccount acc : accounts) {
+            if (acc.GetAccountNumber() == newNum) {
+                return; // duplicate -> ignore
+            }
+        }
+
         accounts.add(account);
     }
 
     // CloseAccount: if not found -> ignore. If found and balance >= 0 -> remove.
     // If balance < 0 -> print message and keep it.
+    @Override
     public void CloseAccount(int accountNumber) {
         Iterator<IAccount> it = accounts.iterator();
         while (it.hasNext()) {
@@ -37,11 +47,13 @@ public class Bank {
     }
 
     // GetAllAccounts: returns all of the accounts in the bank as List
+    @Override
     public List<IAccount> GetAllAccounts() {
         return new ArrayList<>(accounts); // return copy (safer)
     }
 
     // GetAllAccountsInDebt: returns a list of accounts with negative balance.
+    @Override
     public List<IAccount> GetAllAccountsInDebt() {
         List<IAccount> res = new ArrayList<>();
         for (IAccount acc : accounts) {
@@ -52,7 +64,8 @@ public class Bank {
         return res;
     }
 
-    // GetAllAccountsWithBalance: returns a list of accounts with balance bigger than supplied double
+    // GetAllAccountsWithBalance: returns accounts with balance strictly greater than minBalance
+    @Override
     public List<IAccount> GetAllAccountsWithBalance(double minBalance) {
         List<IAccount> res = new ArrayList<>();
         for (IAccount acc : accounts) {
