@@ -68,9 +68,40 @@ Optional improvement included:
 
 ### Option B: Command Line
 From the project root (adjust paths if needed):
-```bash
 javac -d out src/com/bank/*.java
 java -cp out com.bank.Main
 
 ---
-# d
+
+## Main Demo / Output
+
+Main.java includes:
+
+Basic tests for each account type (Standard/Basic/Premium) with printed expected results.
+
+A bank scenario:
+
+Open several accounts in Bank
+
+Perform deposits/withdrawals
+
+Print:
+
+All accounts
+
+Accounts in debt
+
+Accounts with balance above a threshold
+
+Demonstrate CloseAccount behavior (close allowed only when balance >= 0)
+
+## Notes
+
+The program prints results to the console to demonstrate correctness.
+
+## Team:
+Amit Messil
+Dan Madpis
+Amit Mane
+Ran Efroni
+
